@@ -1,0 +1,664 @@
+/* === GENERALE === */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding-top: 85px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Offset per navbar fissa */
+section[id] {
+    scroll-margin-top: 120px;
+}
+
+/* === LOADING SCREEN === 
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2c2c2c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+
+.loader {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: #829841;
+    letter-spacing: 4px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+*/
+.p {
+    text-align: left;
+}
+
+/* === NAVBAR === */
+.navbar {
+    background-color:black;
+    padding: 50px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+    font-family: 'inter', sans-serif;
+    display: inline-block;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+}
+
+/* Pallino animato */
+.navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: #829841;
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #829841;
+    transform: translateY(-5px) rotate(-2deg);
+}
+
+/* Animazione pallino */
+.navbar a:hover::after {
+    opacity: 1;
+    bottom: -12px;
+    animation: bounce 0.6s ease infinite;
+}
+
+/* Keyframe animazione */
+@keyframes bounce {
+    0%, 100% { 
+        transform: translateX(-50%) translateY(0); 
+    }
+    50% { 
+        transform: translateX(-50%) translateY(-4px); 
+    }
+}
+
+/* Blocca effetti su SOTTIGRAFICS */
+.navbar-brand {
+    transition: none !important;
+}
+
+.navbar-brand:hover {
+    color: white !important;
+    transform: none !important;
+}
+
+.navbar-brand::after {
+    display: none !important;
+}
+
+/* === HEADER === */
+.header-section {
+    width: 100%;
+    margin: 0;
+    padding: 55px 0;
+    position: relative;
+    background-color: #829841;
+}
+
+.header-section img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+@media (min-width: 768px) {
+    .header-section img {
+        max-height: 500px;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 1200px) {
+    .header-section img {
+        max-height: 600px;
+    }
+}
+
+/* === HERO SECTION === */
+.hero-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hero-video-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 1;
+    filter: grayscale(100%);
+}
+
+
+/* Overlay con gradiente
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg, 
+        rgba(130, 152, 65, 0.2) 0%, 
+        rgba(0, 0, 0, 0.5) 100%
+    );
+    z-index: 2;
+}
+
+*/
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 3;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.hero-title {
+    color: #829841;
+    font-size: 120px;
+    text-transform: uppercase;
+    line-height: 1.3;
+    margin: 0;
+    letter-spacing: 2px;
+    animation: fadeInScale 1.2s ease-out;
+}
+
+.hero-subtitle {
+    color: #829841;
+    text-transform: uppercase;
+    line-height: 1.3;
+    margin-top: 10px;
+    letter-spacing: 2px;
+    font-size: 18px;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out 0.5s forwards;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive Hero */
+@media (max-width: 768px) {
+    .hero-video-container {
+        height: 60vh;
+    }
+    
+    .hero-title {
+        font-size: 48px !important;
+    }
+    
+    .hero-subtitle {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-video-container {
+        height: 50vh;
+    }
+}
+
+/* === CHI SONO SECTION === */
+.chi-sono-section {
+    background: #D9D9D9;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.chi-sono-title {
+    text-align: right;
+    font-family: 'Bebas Neue';
+    font-size: 125px;
+    color: black;
+}
+
+.portfolio-description {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: black;
+    text-align: left;
+}
+
+
+.chi-sono-section-portfolio {
+    background: #D9D9D9;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.chi-sono-title-portfolio {
+    text-align: right;
+    font-family: 'Bebas Neue';
+    font-size: 125px;
+    color: black;
+}
+
+
+
+
+@media (max-width: 768px) {
+    .chi-sono-title {
+        font-size: 80px !important;
+        text-align: center;
+    }
+}
+
+/* === CONTENT SECTIONS === */
+.content-section {
+    padding: 20px 0;
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.content-section:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.content-section:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.content-section img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.content-section img:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+/*
+.content-section .p .titolo {
+    font-family: 'inter', sans-serif;
+    font-size: 20px;
+    color: #829841;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+.content-section p {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: #555;
+    padding: 0 20px;
+}
+
+/* Responsive Content */
+@media (max-width: 768px) {
+    .content-section {
+        padding: 60px 20px;
+    }
+    
+    .content-section h3 {
+        font-size: 32px;
+        text-align: center;
+    }
+    
+    .content-section p {
+        font-size: 1rem;
+        padding: 0;
+    }
+}
+
+
+
+
+/* === PORTFOLIO SECTION === */
+
+.portfolio-section {
+    background-color: #829841; /* Verde come nell'immagine */
+    padding: 80px 0 100px 0;
+    position: relative;
+}
+
+/* Titolo principale PORTFOLIO */
+.portfolio-main-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 180px;
+    text-align: center;
+    color: black;
+}
+
+/* Container immagini a sinistra */
+.portfolio-images {
+    display: flex;
+    gap: 20px;
+    padding: 20px 20px;
+}
+
+.portfolio-image-item {
+    flex: 1;
+}
+
+.portfolio-image-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* Contenuto testo a destra */
+.portfolio-text-content {
+    background-color: white;
+    padding: 40px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Titolo progetto */
+.portfolio-project-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    color: black;
+    margin-bottom: 15px;
+    text-decoration: underline;
+    text-decoration-color: black;
+}
+
+/* Descrizione progetto */
+.portfolio-description {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: black;
+    text-align: left;
+}
+
+/* === RESPONSIVE === */
+
+@media (max-width: 1200px) {
+    .portfolio-main-title {
+        font-size: 120px;
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-main-title {
+        font-size: 80px;
+        margin-bottom: 40px;
+    }
+    
+    .portfolio-images {
+        flex-direction: column;
+        margin-bottom: 30px;
+    }
+    
+    .portfolio-text-content {
+        padding: 30px 20px;
+    }
+    
+    .portfolio-project-title {
+        font-size: 36px;
+        text-align: center;
+    }
+    
+    .portfolio-description {
+        text-align: left;
+    }
+}
+
+@media (max-width: 576px) {
+    .portfolio-main-title {
+        font-size: 60px;
+        letter-spacing: 4px;
+    }
+    
+    .portfolio-project-title {
+        font-size: 28px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* === FLIP CARD EFFECT === */
+
+/* Container della carta */
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 500px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+/* Inner container con la trasformazione */
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Gira la carta al hover */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Fronte e retro della carta */
+.flip-card-front, 
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow: hidden;
+}
+
+/* Fronte della carta */
+.flip-card-front {
+    background-color: #fff;
+}
+
+/* Retro della carta (girato di 180°) */
+.flip-card-back {
+    background-color: #829841;
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Immagini dentro le carte */
+.flip-card-front img,
+.flip-card-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: none;
+}
+
+/* Rimuovi l'effetto zoom per le flip card */
+.flip-card img:hover {
+    transform: none;
+    filter: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .flip-card {
+        height: 400px;
+    }
+}
+
+@media (max-width: 576px) {
+    .flip-card {
+        height: 300px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.footer-container {
+            width: 100%;
+            padding: 20px 20px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .footer-left h1 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #000000;
+        }
+        
+        .footer-left .copyright {
+            font-size: 14px;
+            color: #000000;
+            margin-bottom: 12px;
+        }
+        
+        .footer-links {
+            font-size: 14px;
+            color: #000000;
+        }
+        
+        .footer-links a {
+            color: #000000;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-links span {
+            margin: 0 8px;
+        }
+        
+        .footer-right {
+            text-align: right;
+        }
+        
+        .contact-label {
+            font-size: 14px;
+            color: #000000;
+            margin-bottom: 8px;
+        }
+        
+        .profile-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #d3d3d3;
+            margin: 0 0 8px auto;
+        }
+        
+        .footer-right h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+            color: #000000;
+        }
+        
