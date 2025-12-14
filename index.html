@@ -516,6 +516,53 @@
 
         console.log('Script loaded!'); // Debug
 
+
+// ========== DROPDOWN CON DELAY (SOLO DESKTOP) ==========
+if (window.innerWidth > 768) {
+    let dropdownTimeout;
+    const dropdown = document.querySelector('.dropdown');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    // ✅ Mostra dropdown con delay
+    dropdown.addEventListener('mouseenter', function() {
+        clearTimeout(dropdownTimeout);
+        dropdownMenu.style.display = 'flex';
+        // Piccolo delay per attivare transizione
+        setTimeout(() => {
+            dropdownMenu.style.opacity = '1';
+            dropdownMenu.style.visibility = 'visible';
+        }, 10);
+    });
+
+    // ✅ Nascondi dropdown con delay di 300ms
+    dropdown.addEventListener('mouseleave', function() {
+        dropdownTimeout = setTimeout(function() {
+            dropdownMenu.style.opacity = '0';
+            dropdownMenu.style.visibility = 'hidden';
+            setTimeout(() => {
+                dropdownMenu.style.display = 'none';
+            }, 300);
+        }, 300); // ✅ 300ms di tolleranza
+    });
+
+    // ✅ Se entri nel dropdown, cancella il timeout
+    dropdownMenu.addEventListener('mouseenter', function() {
+        clearTimeout(dropdownTimeout);
+    });
+
+    // ✅ Se esci dal dropdown, chiudi con delay
+    dropdownMenu.addEventListener('mouseleave', function() {
+        dropdownTimeout = setTimeout(function() {
+            dropdownMenu.style.opacity = '0';
+            dropdownMenu.style.visibility = 'hidden';
+            setTimeout(() => {
+                dropdownMenu.style.display = 'none';
+            }, 300);
+        }, 300);
+    });
+}
+
+
         // ========== SCROLL INDICATOR ==========
         function updateScrollIndicator() {
             const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
