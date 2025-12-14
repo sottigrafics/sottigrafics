@@ -109,7 +109,7 @@ section[id] {
 
         .voci a {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 28px;
+            font-size: 40px;
             color: white;
             text-decoration: none;
             letter-spacing: 1px;
@@ -118,6 +118,7 @@ section[id] {
 
         .voci a:hover {
             color: #829841;
+            text-decoration: underline;
         }
 
         /* ========== DROPDOWN ========== */
@@ -312,7 +313,7 @@ section[id] {
 
 @media (min-width: 768px) {
     .header-section img {
-        max-height: 500px;
+        max-height: 400px;
         object-fit: cover;
     }
 }
@@ -417,7 +418,7 @@ section[id] {
 @media (max-width: 768px) {
     .hero-video-container {
         height: 60vh;
-        min-height: 400px;
+        max-height: 400px;
     }
     
     .hero-title {
@@ -618,7 +619,6 @@ section[id] {
         padding-bottom: 20px;
     }
     .portfolio-images-foto {
-        flex-direction: row;
         padding-bottom: 20px;
         padding-top: 20px;
     }

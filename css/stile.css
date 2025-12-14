@@ -1,0 +1,885 @@
+/* ========================================
+   GENERALE
+   ======================================== */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding-top: 85px;
+    background-color: #000000;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+section[id] {
+    scroll-margin-top: 120px;
+}
+
+.p {
+    text-align: left;
+}
+
+
+/* ========================================
+   SCROLL INDICATOR
+   ======================================== */
+.scroll-indicator {
+    position: fixed;
+    top: 110px;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, #829841, #a3b85c);
+    z-index: 1001;
+    transition: width 0.1s ease;
+    box-shadow: 0 2px 10px rgba(130, 152, 65, 0.5);
+}
+
+/* ========================================
+   NAVBAR
+   ======================================== */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(130, 152, 65, 0.3);
+    padding: 30px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 2px solid rgba(130, 152, 65, 0.3);
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 40px;
+    font-family: 'Bebas Neue', sans-serif;
+    display: inline-block;
+    position: relative;
+    line-height: -10px;
+}
+
+/* Focus states per accessibilità */
+a:focus, button:focus {
+    outline: 2px solid #829841;
+    outline-offset: 2px;
+}
+
+/* ========== HAMBURGER ========== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background-color: white;
+            margin: 4px 0;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+            display: block;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+            background-color: #829841;
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+            background-color: #829841;
+        }
+
+
+
+        /* ========== MENU ========== */
+        .voci {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .voci a {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            color: white;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .voci a:hover {
+            color: #829841;
+        }
+
+        /* ========== DROPDOWN ========== */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: fixed;
+            top: 92px;
+            left: 0;
+            width: 100vw;
+            padding: 30px 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            gap: 50px;
+            border-bottom: 2px solid rgba(130, 152, 65, 0.3);
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: flex;
+        }
+
+        .dropdown-menu a {
+            font-size: 24px;
+            padding: 10px 20px;
+        }
+
+        /* ========== OVERLAY ========== */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 998;
+        }
+
+        .nav-overlay.active {
+            display: block;
+        }
+
+
+/* ========== RESPONSIVE MOBILE ========== */
+@media (max-width: 768px) {
+    body {
+        padding-top: 80px;
+    }
+
+    .navbar {
+        padding: 20px 0;
+    }
+
+    .navbar-brand {
+        font-size: 24px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    /* MENU LATERALE */
+    .voci {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 85%;
+        max-width: 350px;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        padding: 100px 30px 30px;
+        gap: 0;
+        transition: right 0.4s ease;
+        border-left: 2px solid rgba(130, 152, 65, 0.3);
+        overflow-y: auto; /* ✅ Permette scroll */
+        z-index: 999;
+    }
+
+    .voci.active {
+        right: 0;
+    }
+
+    /* ✅ LINK E DROPDOWN CON BORDO */
+    .voci > a,
+    .dropdown {
+        border-bottom: 1px solid rgba(130, 152, 65, 0.2);
+        padding: 20px 0;
+        width: 100%; /* ✅ Larghezza piena */
+    }
+
+    .voci a {
+        font-size: 32px;
+        margin: 0; /* ✅ Rimuovi margini */
+    }
+
+    /* ✅ DROPDOWN TOGGLE */
+    .dropdown-toggle {
+        display: block;
+        width: 100%;
+        font-size: 32px !important; /* ✅ Forza dimensione */
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* ✅ DROPDOWN MENU CHE SI ESPANDE */
+    .dropdown-menu {
+        position: static !important; /* ✅ Non fixed */
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 0 0 20px; /* ✅ Indent a sinistra */
+        background: rgba(130, 152, 65, 0.1);
+        border: none !important;
+        border-left: 3px solid #829841 !important;
+        border-radius: 0;
+        margin-top: 15px;
+        width: 100%; /* ✅ Non esce dal contenitore */
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        backdrop-filter: none !important;
+    }
+
+    /* ✅ QUANDO È ATTIVO */
+    .dropdown.active .dropdown-menu {
+        display: flex;
+        max-height: 500px; /* ✅ Si espande */
+    }
+
+    /* ✅ LINK DENTRO DROPDOWN */
+    .dropdown-menu a {
+        font-size: 24px !important;
+        padding: 10px 0 !important;
+        margin: 0 !important;
+        border: none !important;
+    }
+
+    /* ✅ SCROLL INDICATOR PIÙ IN ALTO */
+    .scroll-indicator {
+        top: 80px;
+    }
+}
+/* ========================================
+   HEADER
+   ======================================== */
+.header-section {
+    width: 100%;
+    margin: 0;
+    position: relative;
+    background-color: #829841;
+    margin-top: -85px; /* Compensa il padding-top del body */
+    padding-top: 70px;
+}
+
+.header-section img {
+    min-height: 100vh;
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    
+}
+
+
+.header-section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to bottom, transparent,black);
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+
+@media (min-width: 768px) {
+    .header-section img {
+        max-height: 500px;
+        object-fit: cover;
+    }
+}
+
+@media (min-width: 1200px) {
+    .header-section img {
+        max-height: 600px;
+    }
+}
+
+
+/* ========================================
+   HERO SECTION - VIDEO CON CITAZIONE
+   ======================================== */
+.hero-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hero-video-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: 1;
+    filter: grayscale(100%);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 3;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    padding: 0 20px;
+}
+
+.hero-title {
+    color: #829841;
+    font-size: 120px;
+    text-transform: uppercase;
+    line-height: 1.3;
+    margin: 0;
+    letter-spacing: 2px;
+    animation: fadeInScale 1.2s ease-out;
+}
+
+.hero-subtitle {
+    color: #829841;
+    text-transform: uppercase;
+    line-height: 1.3;
+    margin-top: 10px;
+    letter-spacing: 2px;
+    font-size: 18px;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out 0.5s forwards;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* RESPONSIVE HERO */
+@media (max-width: 768px) {
+    .hero-video-container {
+        height: 60vh;
+        min-height: 400px;
+    }
+    
+    .hero-title {
+        font-size: 48px;
+    }
+    
+    .hero-subtitle {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-video-container {
+        height: 50vh;
+        min-height: 300px;
+    }
+    
+    .hero-title {
+        font-size: 36px;
+    }
+    
+    .hero-subtitle {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-video-container {
+        height: 50vh;
+    }
+}
+
+
+/* ========================================
+   CHI SONO SECTION
+   ======================================== */
+.chi-sono-section {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.chi-sono-section .row:first-child {
+    background: black;
+}
+
+.chi-sono-title {
+    text-align: right;
+    font-family: 'Bebas Neue';
+    font-size: 125px;
+    color: white;
+    margin: 0;
+    line-height: 120px;
+    padding-top: 15px;
+
+}
+
+
+
+@media (max-width: 768px) {
+    .chi-sono-title {
+        font-size: 80px;
+    }
+}
+
+
+/* ========================================
+   SEZIONE PORTFOLIO
+   ======================================== */
+.chi-sono-section-portfolio {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.chi-sono-title-portfolio {
+    text-align: right;
+    font-family: 'Bebas Neue';
+    font-size: 125px;
+    color: white;
+    margin: 0;
+    line-height: 120px;
+    padding-top: 15px;
+}
+
+.grafica-section {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 10px;
+}
+
+.grafica-section .row:first-child {
+    border-top: 4px solid rgba(255, 255, 255, 0.545);
+
+}
+
+.grafica {
+    text-align: right;
+    font-family: 'Bebas Neue';
+    font-size: 50px;
+    color:rgba(255, 255, 255, 0.545);
+    margin: 0;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .chi-sono-title-portfolio {
+        font-size: 80px;
+        padding-right: 20px;
+    }
+}
+
+
+/* ========================================
+   PORTFOLIO - IMMAGINI E TESTO
+   ======================================== */
+.portfolio-images {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.portfolio-images-foto {
+    display: flex;
+    gap: 20px;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.portfolio-text-content-foto {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+        padding-bottom: 50px;
+
+}
+
+.portfolio-image-item {
+    flex: 1;
+}
+
+.portfolio-image-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+.portfolio-image-item:hover img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transform: scale(1.05) translateY(-5px);
+}
+
+
+
+
+.portfolio-text-content {
+    padding-top: 100px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.portfolio-project-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 30px;
+    color: white;
+    margin-bottom: 15px;
+    text-decoration: underline;
+    text-decoration-color: white;
+}
+
+.portfolio-description {
+    font-size: 1rem;
+    line-height: 1.3;
+    color: white;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    .portfolio-images {
+        flex-direction: row;
+        padding-bottom: 20px;
+    }
+    .portfolio-images-foto {
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+    
+    .portfolio-text-content {
+        padding-top: 25px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 100px;
+    }
+    .portfolio-text-content-foto {
+        padding-top: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 50px;
+    }
+
+
+}
+
+
+
+
+/* ========================================
+   CAROUSEL MANUALE SCOUT
+   ======================================== */
+.scout-carousel-wrapper {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.scout-carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.scout-carousel img {
+    min-width: 100%;
+    width: 100%;
+    display: block;
+    padding-bottom: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 65px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 20px 15px;
+    border-radius: 20px;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.indicator:hover {
+    background: rgba(130, 152, 65, 0.8);
+    transform: scale(1.2);
+}
+
+.indicator.active {
+    background: #829841;
+    transform: scale(1.8);
+}
+
+/* Responsive per mobile */
+@media (max-width: 768px) {
+    .carousel-indicators {
+        gap: 6px;
+        padding: 8px 12px;
+    }
+    
+    .indicator {
+        width: 8px;
+        height: 8px;
+    }
+
+
+    .scout-carousel img {
+        padding-bottom: 20px;
+    }
+    }
+
+
+/* ========================================
+   VIDEO NELLA SEZIONE FOTO
+   ======================================== */
+.video-wrapper {
+    width: 100%;
+    height: auto;
+}
+
+.portfolio-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+
+/* ========================================
+   CONTENT SECTIONS
+   ======================================== */
+.content-section {
+    padding: 20px 0;
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.content-section:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.content-section:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.content-section img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.content-section img:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+@media (max-width: 768px) {
+    .content-section {
+        padding: 60px 20px;
+    }
+}
+
+/* ========================================
+   CONTATTI
+   ======================================== */
+.contatti{
+    background-color: #82984199;
+    color: white;
+    text-align: center;
+    font-size: 80px;
+    font-family: 'Bebas Neue';
+    backdrop-filter: blur(10px);
+
+
+}
+
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.footer-container {
+    width: 100%;
+    padding: 20px 20px;
+    background-color: #000000;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.footer-left h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: white;
+    font-family: 'Bebas Neue';
+}
+
+.footer-left .copyright {
+    font-size: 14px;
+    color: white;
+    margin-bottom: 12px;
+}
+
+.footer-links {
+    font-size: 14px;
+    color: white;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+    color: #829841;
+}
+
+.footer-links span {
+    margin: 0 8px;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.footer-right a {
+    font-size: 30px;
+    font-weight: 600;
+    margin: 0;
+    color: white;
+    font-family: 'Bebas Neue';
+}
+
+.footer-right a:hover {
+    font-size: 30px;
+    font-weight: 600;
+    margin: 0;
+    color: #829841;
+    text-decoration: underline;
+}
+
+.profile-circle {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 8px auto;
+}
+
+.profile-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
