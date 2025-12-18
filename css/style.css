@@ -311,10 +311,10 @@ section[id] {
 
 
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
     .header-section img {
-        max-height: 400px;
-        object-fit: cover;
+        min-height: auto;
+        object-fit: contain;
     }
 }
 
@@ -323,6 +323,7 @@ section[id] {
         max-height: 600px;
     }
 }
+
 
 
 /* ========================================
